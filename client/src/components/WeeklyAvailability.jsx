@@ -21,7 +21,6 @@ function WeeklyAvailability() {
     const [selectedEmployee, setSelectedEmployee] = useState('');
     const [preferences, setPreferences] = useState([]); // Stores recurring availability
     const [loading, setLoading] = useState(true);
-    const [error, setError] = useState('');
 
     // Fetch employees and shift templates once on component mount
     useEffect(() => {
