@@ -1,28 +1,41 @@
 # Automated Shift Scheduler
 
-A full-stack MERN application designed to help managers automate the creation of weekly and monthly employee schedules based on business needs and employee availability.
+A full-stack MERN application designed to help managers automate and manage employee schedules. This tool streamlines the scheduling process by intelligently assigning shifts based on employee availability, weekly hour constraints, and business needs, while also providing a complete suite of management tools.
+
+---
 
 ## Features
 
-This application allows managers to streamline the scheduling process, reducing manual effort and preventing conflicts.
+This application provides an end-to-end solution for schedule management, from data entry to a fully interactive and adjustable schedule.
 
-### Implemented Features
-* **Employee Management:** Create, view, update, and delete employee profiles, including their name, contact information, and role.
-* **Shift Template Management:** Define reusable shift templates (e.g., "Morning Shift", "Closing Shift") with specific start and end times.
+* **Automated Schedule Generation:** The core of the application is an intelligent algorithm that generates a schedule for any given date range based on pre-defined requirements.
+* **Smart Assignment Logic:** The scheduling engine respects employee constraints, including:
+    * Recurring weekly availability for specific shifts.
+    * Minimum and maximum desired shifts per week.
+    * Prevents employees from being double-booked on the same day.
+* **Interactive Calendar View:** The generated schedule is displayed in a clean, intuitive calendar grid, making it easy to see the week or month at a glance.
+* **Manual Overrides:** Managers can click on any shift in the generated calendar to manually reassign it to another eligible employee, providing complete control over the final schedule.
+* **Comprehensive Data Management:** Full CRUD (Create, Read, Update, Delete) functionality for:
+    * **Employees:** Manage employee profiles, contact info, roles, and shift preferences.
+    * **Shift Templates:** Define reusable shift types with specific start and end times.
+* **Polished User Experience:** The interface is designed to be user-friendly and responsive, featuring:
+    * Toast notifications for clear feedback on all actions.
+    * Helpful loading states and empty-state messages.
+    * A clean, icon-driven UI for intuitive navigation.
 
-### In-Progress & Planned Features
-* **Availability Tracking:** Allow managers to input and view employee unavailability for specific dates or recurring times.
-* **Automated Schedule Generation:** The core feature – an algorithm that will generate an optimal schedule based on shift requirements and employee availability.
-* **Interactive Schedule View:** Display the generated schedule in a clear, easy-to-read calendar or table format.
-* **Manual Overrides:** Allow managers to manually adjust the auto-generated schedule to handle exceptions.
+---
 
 ## Technology Stack
 
-This project is built using the MERN stack, a powerful and popular choice for building modern web applications.
+This project is built using the MERN stack and modern development practices.
 
-* **Frontend:** [React](https://reactjs.org/) (with Vite)
-* **Backend:** [Node.js](https://nodejs.org/) & [Express.js](https://expressjs.com/)
-* **Database:** [MongoDB](https://www.mongodb.com/) (with Mongoose ODM)
+* **Frontend:** **React** (with Vite), **Tailwind CSS**
+* **Backend:** **Node.js** & **Express.js**
+* **Database:** **MongoDB** (with Mongoose)
+* **UI Libraries:** `lucide-react` for icons, `react-hot-toast` for notifications.
+* **Deployment:** Hosted on **Vercel** (Frontend) and **Render** (Backend).
+
+---
 
 ## Getting Started
 
@@ -30,8 +43,8 @@ To get a local copy up and running, follow these simple steps.
 
 ### Prerequisites
 
-* Node.js installed on your machine: [Download Node.js](https://nodejs.org/)
-* A free MongoDB Atlas account and cluster: [Create a MongoDB Atlas Cluster](https://www.mongodb.com/cloud/atlas)
+* Node.js and npm installed.
+* A free MongoDB Atlas account and cluster.
 
 ### Installation & Setup
 
@@ -45,42 +58,33 @@ To get a local copy up and running, follow these simple steps.
     ```sh
     # Navigate to the server directory
     cd server
-
-    # Install NPM packages
+    
+    # Install dependencies
     npm install
-
-    # Create a .env file in the /server directory
-    # Add your MongoDB connection string to this file
+    
+    # Create a .env file and add your MongoDB connection string
     MONGO_URI=your_mongodb_connection_string
     ```
 
 3.  **Set up the Frontend Client:**
     ```sh
-    # Navigate to the client directory from the root folder
+    # Navigate to the client directory from the root
     cd client
-
-    # Install NPM packages
+    
+    # Install dependencies
     npm install
     ```
 
-### Usage
+### Running the Application
 
-To run the application, you will need to run the backend and frontend servers in two separate terminals.
+1.  **Start the Backend Server:**
+    * In a terminal in the `/server` directory: `npm run dev`
 
-1.  **Run the Backend Server:**
-    * In a terminal pointed at the `/server` directory:
-    ```sh
-    npm run dev
-    ```
-    * Your API server should now be running on `http://localhost:5000`.
+2.  **Start the Frontend Client:**
+    * In a second terminal in the `/client` directory: `npm run dev`
 
-2.  **Run the Frontend Client:**
-    * In a second terminal pointed at the `/client` directory:
-    ```sh
-    npm run dev
-    ```
-    * Open your browser and navigate to the URL provided by Vite (usually `http://localhost:5173`).
+---
 
 ## Project Status
 
-This project is currently **in development**. Core features like employee and shift management are functional. The next major milestone is the implementation of the scheduling algorithm.
+This project is **feature-complete** and deployed. Future enhancements could include features like time-off requests, employee-facing accounts for self-service availability, or more advanced scheduling rules.
