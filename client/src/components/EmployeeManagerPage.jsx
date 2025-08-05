@@ -15,8 +15,7 @@ function EmployeeManagerPage() {
         minShiftsPerWeek: '',
         maxShiftsPerWeek: ''
     });
-    const [error, setError] = useState('');
-
+    const [loading, setLoading] = useState(true);
     const [isEditModalOpen, setIsEditModalOpen] = useState(false);
     const [currentEmployee, setCurrentEmployee] = useState(null);
 
