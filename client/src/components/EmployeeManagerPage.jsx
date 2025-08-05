@@ -1,7 +1,7 @@
 // client/src/components/EmployeeManagerPage.jsx
 
 import React, { useState, useEffect } from 'react';
-import API from '../api';
+import { API } from '../api';
 import toast from 'react-hot-toast';
 import { Trash2, Edit, UserPlus } from 'lucide-react';
 

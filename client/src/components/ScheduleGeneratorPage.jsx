@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useMemo } from 'react';
-import API from '../api';
+import { API } from '../api';
 import toast from 'react-hot-toast';
 import { CalendarCheck } from 'lucide-react';
 
