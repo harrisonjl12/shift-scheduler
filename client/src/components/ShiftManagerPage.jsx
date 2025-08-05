@@ -1,7 +1,7 @@
 // client/src/components/ShiftManagerPage.jsx
 
 import React, { useState, useEffect } from 'react';
-import axios from 'axios';
+import API from '../api';
 import toast from 'react-hot-toast';
 import { Trash2, Edit, CalendarPlus } from 'lucide-react';
 
@@ -19,7 +19,7 @@ function ShiftManagerPage() {
     const fetchShifts = async () => {
         try {
             setLoading(true);
-            const response = await axios.get('/api/shifttemplates');
+            const response = await API.get('/api/shifttemplates');
             setShifts(response.data);
         } catch (err) {
             toast.error('Could not fetch shift templates.');
@@ -45,7 +45,7 @@ function ShiftManagerPage() {
         const toastId = toast.loading('Adding shift template...');
 
         try {
-            await axios.post('/api/shifttemplates', formData);
+            await API.post('/api/shifttemplates', formData);
             setFormData({ name: '', startTime: '', endTime: '' });
             fetchShifts();
             toast.success('Shift template added!', { id: toastId });
@@ -58,7 +58,7 @@ function ShiftManagerPage() {
         if (window.confirm('Are you sure you want to delete this shift template? This action cannot be undone.')) {
             const toastId = toast.loading('Deleting shift template...');
             try {
-                await axios.delete(`/api/shifttemplates/${shiftId}`);
+                await API.delete(`/api/shifttemplates/${shiftId}`);
                 fetchShifts();
                 toast.success('Shift template deleted', { id: toastId })
             } catch (err) {
@@ -77,7 +77,7 @@ function ShiftManagerPage() {
         if (!currentShift) return;
         const toastId = toast.loading('Updating shift template...');
         try {
-            await axios.put(`/api/shifttemplates/${currentShift._id}`, currentShift);
+            await API.put(`/api/shifttemplates/${currentShift._id}`, currentShift);
             setIsEditModalOpen(false);
             setCurrentShift(null);
             fetchShifts();

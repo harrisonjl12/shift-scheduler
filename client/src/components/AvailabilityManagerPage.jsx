@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import axios from 'axios';
+import API from '../api';
 import Calendar from 'react-calendar';
 import 'react-calendar/dist/Calendar.css';
 
@@ -71,7 +71,7 @@ function AvailabilityManagerPage() {
     useEffect(() => {
         const fetchEmployees = async () => {
             try {
-                const res = await axios.get('/api/employees');
+                const res = await API.get('/api/employees');
                 setEmployees(res.data);
             } catch (err) {
                 setError('Could not fetch employees.');
@@ -89,7 +89,7 @@ function AvailabilityManagerPage() {
         }
         const fetchAvailability = async () => {
             try {
-                const res = await axios.get(`/api/availability/${selectedEmployee}`);
+                const res = await API.get(`/api/availability/${selectedEmployee}`);
                 setAvailability(res.data);
             } catch (err) {
                 setError('Could not fetch availability for this employee.');
@@ -115,14 +115,14 @@ function AvailabilityManagerPage() {
 
         try {
             if (existingRecord) {
-                await axios.delete(`/api/availability/${existingRecord._id}`);
+                await API.delete(`/api/availability/${existingRecord._id}`);
             } else {
-                await axios.post('/api/availability', {
+                await API.post('/api/availability', {
                     employeeId: selectedEmployee,
                     unavailableDate: normalizedDate,
                 });
             }
-            const res = await axios.get(`/api/availability/${selectedEmployee}`);
+            const res = await API.get(`/api/availability/${selectedEmployee}`);
             setAvailability(res.data);
         } catch (err) {
             setError(err.response?.data?.msg || 'Failed to update availability');

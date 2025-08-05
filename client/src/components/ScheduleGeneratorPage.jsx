@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useMemo } from 'react';
-import axios from 'axios';
+import API from '../api';
 import toast from 'react-hot-toast';
 import { CalendarCheck } from 'lucide-react';
 
@@ -23,9 +23,9 @@ function ScheduleGeneratorPage() {
         const fetchInitialData = async () => {
             try {
                 const [shiftsRes, employeesRes, availRes] = await Promise.all([
-                    axios.get('/api/shifttemplates'),
-                    axios.get('/api/employees'),
-                    axios.get('/api/recurring-availability') // Fetches ALL availability records
+                    API.get('/api/shifttemplates'),
+                    API.get('/api/employees'),
+                    API.get('/api/recurring-availability') // Fetches ALL availability records
                 ]);
                 setShiftTemplates(shiftsRes.data);
                 setAllEmployees(employeesRes.data);
@@ -66,7 +66,7 @@ function ScheduleGeneratorPage() {
 
         const toastId = toast.loading('Generating schedule...');
         try {
-            const res = await axios.post('/api/schedule/generate', {
+            const res = await API.post('/api/schedule/generate', {
                 startDate,
                 endDate,
                 requirements
@@ -89,8 +89,8 @@ function ScheduleGeneratorPage() {
 
         try {
             const [employeesRes, shiftsRes] = await Promise.all([
-                axios.get('/api/employees'),
-                axios.get('/api/shifttemplates')
+                API.get('/api/employees'),
+                API.get('/api/shifttemplates')
             ]);
             const employeesMap = new Map(employeesRes.data.map(e => [e._id, e.name]));
             const shiftsMap = new Map(shiftsRes.data.map(s => [s._id, s.name]));
@@ -170,7 +170,7 @@ function ScheduleGeneratorPage() {
         if (!editingShift || !newEmployeeId) return;
 
         try {
-            await axios.put(`/api/schedule/${editingShift._id}`, { employeeId: newEmployeeId });
+            await API.put(`/api/schedule/${editingShift._id}`, { employeeId: newEmployeeId });
 
             // Update the schedule state locally to reflect the change immediately
             setGeneratedSchedule(prevSchedule => {

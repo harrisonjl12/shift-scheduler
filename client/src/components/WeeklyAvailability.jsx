@@ -1,6 +1,6 @@
 
 import React, { useState, useEffect } from 'react';
-import axios from 'axios';
+import API from '../api';
 import toast from 'react-hot-toast';
 import { Users } from 'lucide-react';
 
@@ -29,8 +29,8 @@ function WeeklyAvailability() {
             try {
                 setLoading(true);
                 const [empRes, shiftRes] = await Promise.all([
-                    axios.get('/api/employees'),
-                    axios.get('/api/shifttemplates')
+                    API.get('/api/employees'),
+                    API.get('/api/shifttemplates')
                 ]);
                 setEmployees(empRes.data);
                 setShiftTemplates(shiftRes.data);
@@ -53,7 +53,7 @@ function WeeklyAvailability() {
 
         const fetchPreferences = async () => {
             try {
-                const res = await axios.get(`/api/recurring-availability/${selectedEmployee}`);
+                const res = await API.get(`/api/recurring-availability/${selectedEmployee}`);
                 setPreferences(res.data);
             } catch (err) {
                 toast.error('Failed to load recurring availability.');
@@ -68,8 +68,8 @@ function WeeklyAvailability() {
         if (!selectedEmployee) return;
 
         const operationPromise = isChecked
-            ? axios.post('/api/recurring-availability', { employeeId: selectedEmployee, shiftTemplateId, dayOfWeek: dayIndex })
-            : axios.delete('/api/recurring-availability', { data: { employeeId: selectedEmployee, shiftTemplateId, dayOfWeek: dayIndex } });
+            ? API.post('/api/recurring-availability', { employeeId: selectedEmployee, shiftTemplateId, dayOfWeek: dayIndex })
+            : API.delete('/api/recurring-availability', { data: { employeeId: selectedEmployee, shiftTemplateId, dayOfWeek: dayIndex } });
 
         toast.promise(operationPromise, {
             loading: 'Updating availability...',

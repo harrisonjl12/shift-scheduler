@@ -1,7 +1,7 @@
 // client/src/components/EmployeeManagerPage.jsx
 
 import React, { useState, useEffect } from 'react';
-import axios from 'axios';
+import API from '../api';
 import toast from 'react-hot-toast';
 import { Trash2, Edit, UserPlus } from 'lucide-react';
 
@@ -23,7 +23,7 @@ function EmployeeManagerPage() {
     const fetchEmployees = async () => {
         try {
             setLoading(true);
-            const response = await axios.get('/api/employees');
+            const response = await API.get('/api/employees');
             setEmployees(response.data);
         } catch (err) {
             toast.error('Could not fetch employees.');
@@ -56,7 +56,7 @@ function EmployeeManagerPage() {
         e.preventDefault();
         const toastId = toast.loading('Adding employee..');
         try {
-            await axios.post('/api/employees', formData);
+            await API.post('/api/employees', formData);
             setFormData({ name: '', email: '', phone: '', role: 'Staff', minShiftsPerWeek: '', maxShiftsPerWeek: '' });
             fetchEmployees();
             toast.success('Employee added successfully!', { id: toastId });
@@ -69,7 +69,7 @@ function EmployeeManagerPage() {
         if (window.confirm('Are you sure you want to delete this employee? This will also remove their availability preferences.')) {
             const toastId = toast.loading('Deleting employee...');
             try {
-                await axios.delete(`/api/employees/${employeeId}`);
+                await API.delete(`/api/employees/${employeeId}`);
                 fetchEmployees();
                 toast.success('Employee deleted.', { id: toastId });
             } catch (err) {
@@ -95,7 +95,7 @@ function EmployeeManagerPage() {
         };
         const toastId = toast.loading('Updating employee...');
         try {
-            await axios.put(`/api/employees/${currentEmployee._id}`, updatedEmployeeData);
+            await API.put(`/api/employees/${currentEmployee._id}`, updatedEmployeeData);
             setIsEditModalOpen(false);
             setCurrentEmployee(null);
             fetchEmployees();
