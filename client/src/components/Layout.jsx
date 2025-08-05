@@ -30,7 +30,7 @@ function Layout({ currentPage, setCurrentPage, children }) {
                                         <button
                                             key={link.id}
                                             onClick={() => setCurrentPage(link.id)}
-                                            className={`${navButtonBaseStyles} ${currentPage === link.id ? activeStyles : inactiveStyles}`}
+                                            className={`${navButtonStyles} ${currentPage === link.id ? activeStyles : inactiveStyles}`}
                                         >
                                             <Icon size={16} />
                                             <span>{link.name}</span>
