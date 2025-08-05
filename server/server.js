@@ -13,8 +13,13 @@ require('dotenv').config(); //Loads environment variables from .env file
 const app = express();
 const PORT = process.env.PORT || 5000;
 
+const corsOptions = {
+    origin: 'https://shift-scheduler-iota.vercel.app',
+    optionsSuccessStatus: 200
+};
+
 // Middleware
-app.use(cors()); // Enable CORS for all routes
+app.use(cors(corsOptions)); // Enable CORS for all routes
 app.use(express.json()); // Allow the server to parse JSON bodies
 
 // --- Mongoose Connection ---
