@@ -200,12 +200,8 @@ function EmployeeManagerPage() {
                             <div>
                                 <label htmlFor="edit-role" className="block text-sm font-medium text-gray-700">Role</label>
                                 <select id="edit-role" name="role" value={currentEmployee.role} onChange={handleCurrentEmployeeChange} className="w-full p-2 border border-gray-300 rounded-md">
-                                    <option value="Cashier">Cashier</option>
-                                    <option value="Cook">Cook</option>
-                                    <option value="Server">Server</option>
-                                    <option value="Manager">Manager</option>
-                                    <option value="Bartender">Bartender</option>
-                                    <option value="Host">Host</option>
+                                    <option value="Staff">Staff</option>
+                                    <option value="Lead">Lead</option>
                                 </select>
                             </div>
                             <div className="grid grid-cols-2 gap-4">
